@@ -1,8 +1,3 @@
-// function makeSlider(id, slidesCount) {
-//     let slider = document.querySelector(`#${id}`);
-//     let slides = [...slider.children];
-//     slider.style.overflow = 'hidden';
-// }
 
 function createSlider(id, slideCount) {
     let container = document.querySelector(`#${id}`);
@@ -12,7 +7,9 @@ function createSlider(id, slideCount) {
     [...container.querySelector('.slide-list').children].forEach((slide) => {
         slide.style.minWidth = `${100 / slideCount}%`;
     });
-
+    container.innerHTML += `<button class="right"></button>
+        <button class="left"></button>`;
+    addListener(id);
 }
 
 createSlider('cont', 3);
@@ -32,5 +29,19 @@ function moveLeft(id) {
     container.querySelector('.slide-list').insertBefore(slides[slides.length-1], container.querySelector('.slide-list').firstChild);
 }
 
-// makeSlider('slider');
+
+function addListener (id) {
+    document.querySelector(`#${id}`).addEventListener('click', (event) => {
+       const isLeftButton = event.target.matches('.left');
+       const isRightButton = event.target.matches('.right');
+
+       if (isLeftButton) {
+           moveLeft(id);
+       } else if (isRightButton) {
+           moveRight(id);
+       }
+
+    });
+}
+
 
