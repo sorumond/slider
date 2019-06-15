@@ -12,6 +12,11 @@
     --twitter-border: #828282;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+
 body {
     background: darkgray;
     margin: 0;
@@ -63,16 +68,16 @@ body {
 .left {
     background: white url("img/arrow_left.svg") no-repeat 48%;
     position: absolute;
-    top: 150px;
-    left: 200px;
+    top: 50%;
+    left: 10%;
     z-index: 2;
 }
 
 .right {
     background: white url("img/arrow_right.svg") no-repeat 48%;
     position: absolute;
-    top: 150px;
-    right: 300px;
+    top: 50%;
+    right: 10%;
     z-index: 2;
 }
 
@@ -99,9 +104,9 @@ body {
 .post {
     display: flex;
     flex-direction: column;
-    width: 309px;
+    /*width: 309px;*/
     border: 1px solid var(--twitter-border);
-    margin-right: 50px;
+    /*margin-right: 50px;*/
     border-radius: 4px;
     height: 165px; /* goodbye, Lui */
 }

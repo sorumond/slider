@@ -2,6 +2,7 @@
 function createSlider(id, slideCount) {
     let container = document.querySelector(`#${id}`);
     console.log(container);
+    container.style.position = 'relative';
     let slideList = `<div class="slide-list">${container.innerHTML}</div>`;
     container.innerHTML = slideList;
     [...container.querySelector('.slide-list').children].forEach((slide) => {
