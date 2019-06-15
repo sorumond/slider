@@ -1,10 +1,10 @@
 let transition = 0;
 let maxTransition = 0;
 let minTransition = 0;
+let container = document.querySelector('#cont');
 
 function createSlider(id, slideCount) {
     let container = document.querySelector(`#${id}`);
-    // console.log(container);
     container.style.position = 'relative';
     let slideList = `<div class="slide-list">${container.innerHTML}
 ${container.innerHTML}
@@ -17,68 +17,57 @@ ${container.innerHTML}</div>`;
     });
     transition = 0 - (slides[0].offsetWidth * (slides.length / 3));
     let wrapper = document.querySelector('.slide-list');
-    console.log (transition);
+    console.log(transition);
     wrapper.style.transform = `translateX(${transition}px)`;
     container.innerHTML += `<button class="right"></button>
         <button class="left"></button>`;
-    addListener(id);
     minTransition = transition;
     maxTransition = transition + transition;
 }
 
 createSlider('cont', 3);
 
-
-
-let currentIndex = 1;
 console.log(minTransition);
 console.log(maxTransition);
 console.log(transition);
-function moveRight(id) {
-    let container = document.querySelector(`#${id}`);
+
+function moveRight() {
+    let container = document.querySelector(`#cont`);
     let slides = [...container.querySelector('.slide-list').children];
     let slideList = container.querySelector('.slide-list');
-
     transition -= slides[0].offsetWidth;
+    slideList.style.transition = `.75s`;
     slideList.style.transform = `translateX(${transition}px)`;
-    console.log(transition);
-//     if (currentIndex =) {
-//         container.querySelector('.slide-list').appendChild(slides[0]);
-// }
+    container.querySelector('.right').removeEventListener('click', moveRight);
 }
+
 console.log(transition);
 
-function moveLeft(id) {
-    let container = document.querySelector(`#${id}`);
+function moveLeft() {
+    let container = document.querySelector(`#cont`);
     let slides = [...container.querySelector('.slide-list').children];
     let slideList = container.querySelector('.slide-list');
     transition += slides[0].offsetWidth;
+    slideList.style.transition = `.75s`;
     slideList.style.transform = `translateX(${transition}px)`;
+    container.querySelector('.left').removeEventListener('click', moveLeft);
+}
+
+container.querySelector('.left').addEventListener('click', moveLeft);
+container.querySelector('.right').addEventListener('click', moveRight);
+
+document.querySelector('.slide-list').addEventListener('transitionend', (event) => {
+    document.querySelector('#cont').querySelector('.right').addEventListener('click', moveRight);
+    document.querySelector('#cont').querySelector('.left').addEventListener('click', moveLeft);
+    let container = document.querySelector(`#cont`);
+    let slideList = container.querySelector('.slide-list');
     if (transition > minTransition) {
-        console.log('Гуси Летят');
         transition += minTransition;
         slideList.style.transition = '';
         slideList.style.transform = `translateX(${transition}px)`;
-        slideList.style.transition = `1.5s`;
-        console.log(transition);
+    } else if (transition < maxTransition) {
+        transition -= minTransition;
+        slideList.style.transition = '';
+        slideList.style.transform = `translateX(${transition}px)`;
     }
-}
-
-
-
-
-function addListener(id) {
-    document.querySelector(`#${id}`).addEventListener('click', (event) => {
-        const isLeftButton = event.target.matches('.left');
-        const isRightButton = event.target.matches('.right');
-
-        if (isLeftButton) {
-            moveLeft(id);
-        } else if (isRightButton) {
-            moveRight(id);
-        }
-
-    });
-}
-
-
+});
