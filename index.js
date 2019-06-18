@@ -31,7 +31,7 @@ ${container.innerHTML}</div>`;
         function moveRight() {
             let slides = [...container.querySelector('.slide-list').children];
             let slideList = container.querySelector('.slide-list');
-            transition -= slides[0].offsetWidth;
+            transition -= slides[0].offsetWidth + 20;
             slideList.style.transition = `.75s`;
             slideList.style.transform = `translateX(${transition}px)`;
             container.querySelector('.right').removeEventListener('click', moveRight);
@@ -40,7 +40,7 @@ ${container.innerHTML}</div>`;
         function moveLeft() {
             let slides = [...container.querySelector('.slide-list').children];
             let slideList = container.querySelector('.slide-list');
-            transition += slides[0].offsetWidth;
+            transition += slides[0].offsetWidth + 20;
             slideList.style.transition = `.75s`;
             slideList.style.transform = `translateX(${transition}px)`;
             container.querySelector('.left').removeEventListener('click', moveLeft);
