@@ -16,15 +16,16 @@ ${container.innerHTML}</div>`;
             container.style.overflow = 'hidden';
             let slides = [...container.querySelector('.slide-list').children];
             slides.forEach((slide) => {
-                slide.style.minWidth = `${100 / slideCount}%`;
+                slide.style.minWidth = `calc(${100 / slideCount}% - 20px)`;
+                slide.style.marginRight = '20px';
             });
-            transition = 0 - (slides[0].offsetWidth * (slides.length / 3));
+            transition = 0 - ((slides[0].offsetWidth + 20) * (slides.length / 3));
             let wrapper = container.querySelector('.slide-list');
             wrapper.style.transform = `translateX(${transition}px)`;
-            container.innerHTML += `<button class="right"></button>
-        <button class="left"></button>`;
             minTransition = transition;
             maxTransition = transition + transition;
+            container.innerHTML += `<button class="right"></button>
+        <button class="left"></button>`;
         }
 
         function moveRight() {

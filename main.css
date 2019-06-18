@@ -14,12 +14,15 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 
 body {
     /*background: darkgray;*/
     margin: 0;
+    padding: 0;
 }
 
 .slider {
@@ -43,7 +46,6 @@ body {
 }
 
 .slide {
-    min-width: 300px;
     margin: 0 15px 0 15px;
     height: 200px;
     border: 1px solid black;
@@ -96,7 +98,7 @@ body {
 }
 
 .twitter {
-    width: 100%;
+    width: 90%;
     margin: auto;
 }
 
